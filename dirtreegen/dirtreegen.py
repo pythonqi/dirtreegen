@@ -28,8 +28,11 @@ def nodeMap(IGNORE=None):
     nodes = {}
     for roots, dirs, files in os.walk('.'):
         temp = roots.split('/')
-        isRoot = [i for i in IGNORE if i in temp]
-        files = [f for f in files if f not in IGNORE]
+        if IGNORE:
+            isRoot = [i for i in IGNORE if i in temp]
+            files = [f for f in files if f not in IGNORE]
+        else:
+            isRoot = False
         if not isRoot:
             if len(temp) == 1:
                 nodeLink(root, files)
